@@ -2,6 +2,9 @@
 
 @implementation SimpleVideoFilterViewController
 
+@synthesize starting;
+@synthesize button;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,49 +53,14 @@
     
     // Record a movie for 10 s and store it in /Documents, visible via iTunes file sharing
     
-    NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
-    unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
-    NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
-    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(480.0, 640.0)];
-    movieWriter.encodingLiveVideo = YES;
+   
+    
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720.0, 1280.0)];
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(1080.0, 1920.0)];
-    [filter addTarget:movieWriter];
     [filter addTarget:filterView];
     
     [videoCamera startCameraCapture];
-    
-    double delayToStartRecording = 0.5;
-    dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);
-    dispatch_after(startTime, dispatch_get_main_queue(), ^(void){
-        NSLog(@"Start recording");
-        
-        videoCamera.audioEncodingTarget = movieWriter;
-        [movieWriter startRecording];
-
-//        NSError *error = nil;
-//        if (![videoCamera.inputCamera lockForConfiguration:&error])
-//        {
-//            NSLog(@"Error locking for configuration: %@", error);
-//        }
-//        [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOn];
-//        [videoCamera.inputCamera unlockForConfiguration];
-
-        double delayInSeconds = 10.0;
-        dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-        dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
-            
-            [filter removeTarget:movieWriter];
-            videoCamera.audioEncodingTarget = nil;
-            [movieWriter finishRecording];
-            NSLog(@"Movie completed");
-            
-//            [videoCamera.inputCamera lockForConfiguration:nil];
-//            [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOff];
-//            [videoCamera.inputCamera unlockForConfiguration];
-        });
-    });
 }
 
 - (void)viewDidUnload
@@ -141,6 +109,51 @@
 - (IBAction)updateSliderValue:(id)sender
 {
     [(GPUImageSepiaFilter *)filter setIntensity:[(UISlider *)sender value]];
+}
+
+- (void)start
+{
+	NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
+    unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
+    NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
+	
+	movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(480.0, 640.0)];
+    movieWriter.encodingLiveVideo = YES;
+	
+	[filter addTarget:movieWriter];
+	videoCamera.audioEncodingTarget = movieWriter;
+	[movieWriter startRecording];
+}
+
+- (void)stop
+{
+	[filter removeTarget:movieWriter];
+	videoCamera.audioEncodingTarget = nil;
+	[movieWriter finishRecording];
+	[movieWriter release];
+	NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
+	UISaveVideoAtPathToSavedPhotosAlbum(pathToMovie, nil, nil, nil);
+}
+
+- (IBAction)StartStop:(id)sender
+{
+	if (starting)
+	{
+		[self stop];
+	}
+	else
+	{
+		[self start];
+	}
+	starting = !starting;
+	if (starting)
+	{
+		[button setTitle:@"Stop" forState:UIControlStateNormal];
+	}
+	else
+	{
+		[button setTitle:@"Start" forState:UIControlStateNormal];
+	}
 }
 
 @end
