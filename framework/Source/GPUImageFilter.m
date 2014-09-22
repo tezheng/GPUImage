@@ -269,10 +269,10 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
     };
 
     static const GLfloat rotate180TextureCoordinates[] = {
-        1.0f, 1.0f,
-        0.0f, 1.0f,
         1.0f, 0.0f,
         0.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
     };
 
     switch(rotationMode)
@@ -583,12 +583,12 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
 {
     CGSize rotatedSize = sizeToRotate;
     
-    if (GPUImageRotationSwapsWidthAndHeight(inputRotation))
-    {
-        rotatedSize.width = sizeToRotate.height;
-        rotatedSize.height = sizeToRotate.width;
-    }
-    
+//    if (GPUImageRotationSwapsWidthAndHeight(inputRotation))
+//    {
+//        rotatedSize.width = sizeToRotate.height;
+//        rotatedSize.height = sizeToRotate.width;
+//    }
+
     return rotatedSize; 
 }
 

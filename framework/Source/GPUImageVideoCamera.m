@@ -1045,6 +1045,8 @@ NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString = SHAD
                     }
                 }
             }
+
+			outputRotation = internalRotation;
         }
         else
         {
