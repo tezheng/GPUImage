@@ -1,5 +1,8 @@
 #import "SimpleVideoFilterViewController.h"
 
+// Change this factor to increase the threshold of skin repair effect.
+const float factor = 1.5;
+
 @implementation SimpleVideoFilterViewController
 
 @synthesize starting;
@@ -23,9 +26,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
-//    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
+
+    filter = [[GPUSkinRepairFilter alloc] initWithTexelSize:1.5];
+	[filter addTarget:(GPUImageView*)self.view];
+
+//    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
+    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1920x1080 cameraPosition:AVCaptureDevicePositionBack];
 
@@ -33,33 +39,7 @@
     videoCamera.horizontallyMirrorFrontFacingCamera = NO;
     videoCamera.horizontallyMirrorRearFacingCamera = NO;
 
-//    filter = [[GPUImageSepiaFilter alloc] init];
-    
-//    filter = [[GPUImageTiltShiftFilter alloc] init];
-//    [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.65];
-//    [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.85];
-//    [(GPUImageTiltShiftFilter *)filter setBlurSize:1.5];
-//    [(GPUImageTiltShiftFilter *)filter setFocusFallOffRate:0.2];
-    
-//    filter = [[GPUImageSketchFilter alloc] init];
-    filter = [[GPUImageColorInvertFilter alloc] init];
-//    filter = [[GPUImageSmoothToonFilter alloc] init];
-//    GPUImageRotationFilter *rotationFilter = [[GPUImageRotationFilter alloc] initWithRotation:kGPUImageRotateRightFlipVertical];
-    
     [videoCamera addTarget:filter];
-    GPUImageView *filterView = (GPUImageView *)self.view;
-//    filterView.fillMode = kGPUImageFillModeStretch;
-//    filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    
-    // Record a movie for 10 s and store it in /Documents, visible via iTunes file sharing
-    
-   
-    
-//    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
-//    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720.0, 1280.0)];
-//    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(1080.0, 1920.0)];
-    [filter addTarget:filterView];
-    
     [videoCamera startCameraCapture];
 }
 
@@ -108,7 +88,7 @@
 
 - (IBAction)updateSliderValue:(id)sender
 {
-    [(GPUImageSepiaFilter *)filter setIntensity:[(UISlider *)sender value]];
+	((GPUSkinRepairFilter*)filter).texelSize = [(UISlider *)sender value] * 1.5 * factor;
 }
 
 - (void)start

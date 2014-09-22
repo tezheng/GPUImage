@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF8B812819CD579C00F5807F /* GPUSkinRepairFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8B812719CD579C00F5807F /* GPUSkinRepairFilter.m */; };
+		AF8B812C19CD5CDA00F5807F /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8B812B19CD5CDA00F5807F /* mask.png */; };
 		BCB3C44716BCA8C4003D26B0 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44216BCA8C4003D26B0 /* Icon-72.png */; };
 		BCB3C44816BCA8C4003D26B0 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44316BCA8C4003D26B0 /* Icon-72@2x.png */; };
 		BCB3C44916BCA8C4003D26B0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44416BCA8C4003D26B0 /* Icon.png */; };
@@ -30,19 +32,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AF9844A119C2957B00C60FA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCB5DDEA14E8756A000AF3C2 /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCE209E51943F20C002FEED8;
+			remoteInfo = GPUImageFramework;
+		};
 		BCF8674B1725AB2100912E34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BCB5DDEA14E8756A000AF3C2 /* GPUImage.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
 			remoteInfo = GPUImage;
-		};
-		BCF8674D1725AB2100912E34 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BCB5DDEA14E8756A000AF3C2 /* GPUImage.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
-			remoteInfo = GPUImageTests;
 		};
 		BCF8674F1725AB4E00912E34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -54,6 +56,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF8B812619CD579C00F5807F /* GPUSkinRepairFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUSkinRepairFilter.h; sourceTree = "<group>"; };
+		AF8B812719CD579C00F5807F /* GPUSkinRepairFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUSkinRepairFilter.m; sourceTree = "<group>"; };
+		AF8B812B19CD5CDA00F5807F /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mask.png; path = SimpleVideoFilter/mask.png; sourceTree = "<group>"; };
 		BCB3C44216BCA8C4003D26B0 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../../SharedIcons/Icon-72.png"; sourceTree = "<group>"; };
 		BCB3C44316BCA8C4003D26B0 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../../SharedIcons/Icon-72@2x.png"; sourceTree = "<group>"; };
 		BCB3C44416BCA8C4003D26B0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../../SharedIcons/Icon.png; sourceTree = "<group>"; };
@@ -78,7 +83,7 @@
 		BCB5DDFB14E876ED000AF3C2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		BCB5DDFE14E87783000AF3C2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BCB5DE0014E87789000AF3C2 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		E5066F601855AC78008C7682 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E5066F601855AC78008C7682 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +106,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF812BC319CFB24300464CA9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF8B812B19CD5CDA00F5807F /* mask.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		BCB5DDBF14E86899000AF3C2 = {
 			isa = PBXGroup;
 			children = (
-				E5066F601855AC78008C7682 /* Default-568h@2x.png */,
+				AF812BC319CFB24300464CA9 /* Resources */,
+				BCB5DDD514E86899000AF3C2 /* Supporting Files */,
 				BCB5DDD414E86899000AF3C2 /* SimpleVideoFilter */,
 				BCB5DDCD14E86899000AF3C2 /* Frameworks */,
 				BCB5DDCB14E86899000AF3C2 /* Products */,
@@ -143,7 +157,8 @@
 				BCB5DDE514E868C0000AF3C2 /* SimpleVideoFilterViewController.h */,
 				BCB5DDE614E868C0000AF3C2 /* SimpleVideoFilterViewController.m */,
 				BCB5DDE714E868C0000AF3C2 /* SimpleVideoFilterViewController.xib */,
-				BCB5DDD514E86899000AF3C2 /* Supporting Files */,
+				AF8B812619CD579C00F5807F /* GPUSkinRepairFilter.h */,
+				AF8B812719CD579C00F5807F /* GPUSkinRepairFilter.m */,
 			);
 			path = SimpleVideoFilter;
 			sourceTree = "<group>";
@@ -151,6 +166,7 @@
 		BCB5DDD514E86899000AF3C2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E5066F601855AC78008C7682 /* Default-568h@2x.png */,
 				BCB3C44216BCA8C4003D26B0 /* Icon-72.png */,
 				BCB3C44316BCA8C4003D26B0 /* Icon-72@2x.png */,
 				BCB3C44416BCA8C4003D26B0 /* Icon.png */,
@@ -162,13 +178,14 @@
 				BCB5DDDC14E86899000AF3C2 /* SimpleVideoFilter-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = SimpleVideoFilter;
 			sourceTree = "<group>";
 		};
 		BCF867461725AB2100912E34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				BCF8674C1725AB2100912E34 /* libGPUImage.a */,
-				BCF8674E1725AB2100912E34 /* GPUImageTests.octest */,
+				AF9844A219C2957B00C60FA4 /* GPUImage.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,18 +244,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		AF9844A219C2957B00C60FA4 /* GPUImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GPUImage.framework;
+			remoteRef = AF9844A119C2957B00C60FA4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		BCF8674C1725AB2100912E34 /* libGPUImage.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libGPUImage.a;
 			remoteRef = BCF8674B1725AB2100912E34 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BCF8674E1725AB2100912E34 /* GPUImageTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = GPUImageTests.octest;
-			remoteRef = BCF8674D1725AB2100912E34 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -249,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCB5DDD914E86899000AF3C2 /* InfoPlist.strings in Resources */,
+				AF8B812C19CD5CDA00F5807F /* mask.png in Resources */,
 				BCB5DDE914E868C0000AF3C2 /* SimpleVideoFilterViewController.xib in Resources */,
 				BCB3C44716BCA8C4003D26B0 /* Icon-72.png in Resources */,
 				BCB3C44816BCA8C4003D26B0 /* Icon-72@2x.png in Resources */,
@@ -268,6 +286,7 @@
 			files = (
 				BCB5DDDB14E86899000AF3C2 /* main.m in Sources */,
 				BCB5DDDF14E86899000AF3C2 /* SimpleVideoFilterAppDelegate.m in Sources */,
+				AF8B812819CD579C00F5807F /* GPUSkinRepairFilter.m in Sources */,
 				BCB5DDE814E868C0000AF3C2 /* SimpleVideoFilterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +393,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleVideoFilter/SimpleVideoFilter-Prefix.pch";
 				INFOPLIST_FILE = "SimpleVideoFilter/SimpleVideoFilter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -385,7 +406,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleVideoFilter/SimpleVideoFilter-Prefix.pch";
 				INFOPLIST_FILE = "SimpleVideoFilter/SimpleVideoFilter-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

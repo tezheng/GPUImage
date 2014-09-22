@@ -1,5 +1,7 @@
+
 #import <UIKit/UIKit.h>
 #import "GPUImage.h"
+#import "GPUSkinRepairFilter.h"
 
 @interface SimpleVideoFilterViewController : UIViewController
 {
@@ -9,10 +11,9 @@
 }
 
 - (IBAction)updateSliderValue:(id)sender;
-
 - (IBAction)StartStop:(id)sender;
 
 @property(nonatomic) BOOL starting;
+@property(nonatomic, retain) IBOutlet UIButton* button;
 
-@property(nonatomic, retain) IBOutlet UIButton *button;
 @end

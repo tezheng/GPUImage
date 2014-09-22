@@ -780,7 +780,7 @@ NSString *const kGPUImageYUVVideoRangeConversionForLAFragmentShaderString = SHAD
             
 //            if (!allTargetsWantMonochromeData)
 //            {
-                [self convertYUVToRGBOutput];
+//                [self convertYUVToRGBOutput];
 //            }
 
             int rotatedImageBufferWidth = bufferWidth, rotatedImageBufferHeight = bufferHeight;
